@@ -6,12 +6,12 @@ def writeJsonFile(dataToWrite, fileName):
     if ".json" not in fileName:
         fileName += ".json"
 
-    print "> write to json file is seeing: {0}".format(fileName)
+    print ("> write to json file is seeing: {0}".format(fileName))
 
     with open(fileName, "w") as jsonFile:
         json.dump(dataToWrite, jsonFile, indent=2)
 
-    print "Data was successfully written to {0}".format(fileName)
+    print ("Data was successfully written to {0}".format(fileName))
 
     return fileName
     
@@ -46,14 +46,14 @@ def geoInfo(vtx=0, geo=0, shape=0, skinC=0): # Returns a list of requested objec
             deformShape = geoShape.partition(":")[2] + "Deformed"
             if len(cmds.ls(deformShape)) != 0:
                 geoShape = deformShape
-                print "deformed shape found: " + geoShape
+                print ("deformed shape found: " + geoShape)
     
     else:
         geoShape = selVTX[0].partition(".")[0] + "Shape"
         deformTest = geoShape.partition(":")[2] + "Deformed"
         if len(deformTest) != 0:
             geoShape = deformTest
-            print "deformed shape found on selected vertices: " + geoShape
+            print ("deformed shape found on selected vertices: " + geoShape)
             
             # because the deformed shape is the object listed in the JSON file,
             # the word "Deformed" needs to be injected in the vertex name
@@ -62,8 +62,7 @@ def geoInfo(vtx=0, geo=0, shape=0, skinC=0): # Returns a list of requested objec
                 selVTX[x] = ( selVTX[x].replace(".","ShapeDeformed.") ).partition(":")[2]
             
         selGEO = cmds.listRelatives(geoShape, p=1)[0]
-        print geoShape + " | " + selGEO
-    
+        print (geoShape + " | " + selGEO)
     
     if vtx == 1:
         if len(selVTX) != 0: # if vertices are already selected, then we can take that list whole-sale.
@@ -100,7 +99,7 @@ def getVertexWeights(vertexList=[], skinCluster="", thresholdValue=0.001):
                                               transform=None, q=1, 
                                               ib=thresholdValue) 
                         
-            verticeDict[vtx] = zip(influenceNames, influenceVals)
+            verticeDict[vtx] = list(zip(influenceNames, influenceVals))
         
         return verticeDict
     else:

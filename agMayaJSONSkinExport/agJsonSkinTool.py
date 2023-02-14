@@ -57,7 +57,7 @@ def exportWeightsJSON(*args): # returns the filename that was written
         utils.writeJsonFile(dataToWrite=verticeDict,
                                 fileName=vtxListFileName)
 
-        print "{0} vertices info was written to JSON file".format(len(verticeDict))
+        print ("{0} vertices info was written to JSON file".format(len(verticeDict)))
         return vtxListFileName
 
     else:
@@ -66,7 +66,7 @@ def exportWeightsJSON(*args): # returns the filename that was written
 # jsonSkinTool.py [part 4/4]
 def importWeightsJSON(*args):
     importFile = cmds.textFieldButtonGrp("FileNameDisplay", q=1, text=1)
-    print "Accessing {0}".format(importFile)
+    print ("Accessing {0}".format(importFile))
     
     selectGeoData = utils.geoInfo(geo=1, skinC=1)
     geoName = selectGeoData[0]
@@ -81,6 +81,6 @@ def importWeightsJSON(*args):
                 cmds.skinPercent(skinClusterNM, key, tv=vertData[key], zri=1)
             except:
                 cmds.error("Something went wrong with the skinning")
-        print "{0} vertices were set to specificed values.".format(len(vertData.keys())) ##
+        print ("{0} vertices were set to specificed values.".format(len(vertData.keys()))) ##
     else:
         cmds.error("JSON File was empty ")
